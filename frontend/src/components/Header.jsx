@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-export default function Header({ title = "Sentinel AI", onSettingsClick, onNotifClick }) {
+export default function Header({ title = "Sentinel AI" }) {
   const navigate = useNavigate();
 
   return (
@@ -23,25 +23,16 @@ export default function Header({ title = "Sentinel AI", onSettingsClick, onNotif
       {/* Actions & Status */}
       <div className="flex items-center gap-4">
         <div className="hidden sm:flex items-center gap-3">
-          {/* Notification Button */}
-          <button 
-            onClick={onNotifClick}
-            className="flex items-center justify-center rounded-lg h-10 px-4 bg-surface-dark border border-[#283639] hover:bg-[#283639] text-white transition-colors relative"
-          >
+          <button className="flex items-center justify-center rounded-lg h-10 px-4 bg-surface-dark border border-[#283639] hover:bg-[#283639] text-white transition-colors">
             <span className="material-symbols-outlined text-[20px]">notifications</span>
-            <div className="absolute top-2 right-3 size-2 rounded-full bg-accent-red"></div>
+            <div className="size-2 rounded-full bg-accent-red ml-1"></div>
           </button>
-          
-          {/* Settings Button */}
-          <button 
-            onClick={onSettingsClick}
-            className="flex items-center justify-center rounded-lg h-10 px-4 bg-surface-dark border border-[#283639] hover:bg-[#283639] text-white transition-colors"
-          >
+          <button className="flex items-center justify-center rounded-lg h-10 px-4 bg-surface-dark border border-[#283639] hover:bg-[#283639] text-white transition-colors">
             <span className="material-symbols-outlined text-[20px]">settings</span>
           </button>
         </div>
         
-        {/* Profile Section */}
+        {/* Profile/Connected Icon - Clickable Trigger */}
         <div 
           onClick={() => navigate('/profile')}
           className="flex items-center gap-3 pl-4 border-l border-[#283639] cursor-pointer group"
