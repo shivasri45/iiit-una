@@ -32,7 +32,8 @@ class Settings(BaseSettings):
     
     # Database
     DATABASE_URL: str = "sqlite:///./defi_risk.db"
-    
+    ETHERSCAN_API_KEY: str
+
     # Feature names (must match training)
     FEATURE_NAMES: List[str] = [
         "amount_usd",

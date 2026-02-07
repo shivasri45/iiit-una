@@ -49,7 +49,7 @@ export default function Header({
             token
           </span>
           <span className="text-sm font-medium text-white">
-            Ethereum Mainnet
+            Sepolia Testnet
           </span>
           <span className="material-symbols-outlined text-gray-400 text-sm">
             expand_more
@@ -74,6 +74,18 @@ export default function Header({
             Transactions
           </span>
         </button>
+        <button 
+          className={`flex items-center gap-2 px-4 py-2 rounded-full border transition-colors
+            ${
+              isTransactionsActive
+                ? "bg-primary/20 border-primary text-primary"
+                : "bg-surface-dark border-[#283639] text-white hover:bg-[#283639]"
+            }
+          `}
+        onClick={() => navigate("/wallet-activity")}>
+  My Wallet
+</button>
+
       </div>
 
       {/* RIGHT: Actions + Wallet */}

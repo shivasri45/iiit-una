@@ -9,6 +9,7 @@ import AlertAction from "./pages/AlertAction";
 import ProfileSettings from "./pages/ProfileSettings";
 import Transactions from "./pages/Transactions";
 
+import WalletActivity from "./pages/WalletActivity";
 
 export default function App() {
   return (
@@ -21,7 +22,7 @@ export default function App() {
       <Route path="/action" element={<AlertAction />} />
       <Route path="/profile" element={<ProfileSettings />} />
       <Route path="/transactions" element={<Transactions />} />
-
+      <Route path="/wallet-activity" element={<WalletActivity />} />
     </Routes>
   );
 }
