@@ -28,12 +28,12 @@ class ModelLoader:
         return cls._instance
 
     def _load_models(self):
-        if not MODEL_PATH.exists():
-            raise FileNotFoundError(f"Model not found at {MODEL_PATH}")
-        if not SCALER_PATH.exists():
-            raise FileNotFoundError(f"Scaler not found at {SCALER_PATH}")
-
+        ...
         self.model = joblib.load(MODEL_PATH)
         self.scaler = joblib.load(SCALER_PATH)
 
-        print("✅ ML model and scaler loaded successfully")
+    def validate_features(self, features: list[float]):
+        if len(features) != 4:
+            raise ValueError(
+                f"Expected 4 features, got {len(features)}"
+            )

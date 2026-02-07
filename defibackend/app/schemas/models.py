@@ -20,33 +20,21 @@ class PredictRequest(BaseModel):
     All features required for model inference
     """
     amount_usd: float = Field(..., gt=0, description="Transaction amount in USD")
-    whale_tx: int = Field(..., ge=0, le=1, description="Binary flag: 1 if whale transaction, 0 otherwise")
     tx_count_user: int = Field(..., ge=0, description="Total transaction count by this wallet")
     rolling_volume_user: float = Field(..., ge=0, description="Recent volume surge for this wallet")
-    
+    relative_amount: float = Field(..., ge=0, description="Transaction size relative to wallet history")
+
     # Optional metadata (not used in model)
+    whale_tx: int = Field(0, ge=0, le=1, description="Binary flag: whale transaction (metadata only)")
     tx_hash: Optional[str] = Field(None, description="Transaction hash for reference")
     wallet_address: Optional[str] = Field(None, description="Wallet address for tracking")
-    
-    @field_validator('amount_usd')
+
+    @field_validator("amount_usd")
     @classmethod
     def validate_amount(cls, v):
-        if v > 1e12:  # Sanity check: $1 trillion
+        if v > 1e12:
             raise ValueError("Amount exceeds reasonable bounds")
         return v
-    
-    model_config = {
-        "json_schema_extra": {
-            "example": {
-                "amount_usd": 500000.0,
-                "whale_tx": 1,
-                "tx_count_user": 3,
-                "rolling_volume_user": 1200000.0,
-                "tx_hash": "0x123...",
-                "wallet_address": "0xabc..."
-            }
-        }
-    }
 
 class PredictResponse(BaseModel):
     """
