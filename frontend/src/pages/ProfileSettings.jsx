@@ -4,7 +4,7 @@ import PageContainer from "../components/PageContainer";
 
 export default function ProfileSettings() {
   return (
-    <AppLayout headerProps={{ title: "Profile Settings" }}>
+    <AppLayout headerProps={{ title: "Sentinel AI" }}>
       <PageContainer>
         <h1 className="text-3xl font-bold text-white mb-8">Profile Settings</h1>
         

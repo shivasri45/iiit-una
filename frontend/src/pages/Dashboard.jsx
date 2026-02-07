@@ -1,19 +1,29 @@
+import React, { useState } from "react";
+import QuickSettings from "../components/QuickSettings";
+import QuickNotifications from "../components/QuickNotifications"; // Import new component
 import AppLayout from "../components/AppLayout";
 import PageContainer from "../components/PageContainer";
 import MetricCard from "../components/MetricCard";
 import AlertItem from "../components/AlertItem";
 
 export default function Dashboard() {
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [isNotifOpen, setIsNotifOpen] = useState(false); // New state for notifications
+
   return (
-    <AppLayout>
+    <AppLayout 
+      headerProps={{ 
+        onSettingsClick: () => setIsSettingsOpen(true),
+        onNotifClick: () => setIsNotifOpen(true) // Pass notification trigger to Header
+      }}
+    >
       <PageContainer>
-        {/* KPI Row: 4-column grid on desktop */}
+        {/* KPI Row */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           <MetricCard label="Total Transactions" value="1.2M" icon="receipt_long" subtext="+2.4% vs last week" variant="primary" />
           <MetricCard label="High-Risk Detected" value="14" icon="warning" subtext="+12% spike today" variant="danger" trendIcon="arrow_outward" />
           <MetricCard label="Avg. Risk Score" value="18" icon="analytics" subtext="-5% improvement" variant="secondary" trendIcon="trending_down" />
           
-          {/* Special Threat Card with live pulse animation */}
           <div className="bg-surface-dark border border-[#283639] rounded-xl p-5 relative flex flex-col justify-between overflow-hidden group">
             <div className="absolute inset-0 bg-gradient-to-br from-accent-green/5 to-transparent pointer-events-none" />
             <span className="material-symbols-outlined text-6xl absolute right-0 top-0 opacity-10 p-2 text-accent-green">shield</span>
@@ -31,7 +41,7 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Analytics Section: 2/3 Chart, 1/3 Alert Feed */}
+        {/* Analytics Section */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
           <div className="lg:col-span-2 bg-surface-dark rounded-xl border border-[#283639] p-6 flex flex-col">
             <div className="flex justify-between items-center mb-6">
@@ -44,7 +54,6 @@ export default function Dashboard() {
                 <button className="px-3 py-1 rounded bg-[#283639] text-xs font-bold">7D</button>
               </div>
             </div>
-            {/* SVG graph container from your teammate's code */}
             <div className="relative w-full h-[300px]">
               <svg className="w-full h-full overflow-visible" viewBox="0 0 800 300">
                 <defs>
@@ -55,7 +64,7 @@ export default function Dashboard() {
                 </defs>
                 <path d="M0,220 Q100,200 200,230 T400,180 T600,120 T800,150 V300 H0 Z" fill="url(#areaGradient)" />
                 <path className="drop-shadow-[0_0_8px_rgba(13,204,242,0.6)]" d="M0,220 Q100,200 200,230 T400,180 T600,120 T800,150" fill="none" stroke="#0dccf2" strokeWidth="3" />
-                <circle cx="600" cy="120" fill="#111718" r="6" stroke="#0dccf2" strokeWidth="3" />
+                <circle cx="600" cy="120" fill="#111718" r="6" stroke="#0dccf2" strokeWidth="3"></circle>
               </svg>
             </div>
           </div>
@@ -73,7 +82,7 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Transaction Table placeholder (linked later to full logic) */}
+        {/* Transaction Table */}
         <div className="bg-surface-dark rounded-xl border border-[#283639] overflow-hidden">
            <div className="p-6 border-b border-[#283639]">
               <h3 className="text-xl font-bold">Recent Transactions</h3>
@@ -82,6 +91,16 @@ export default function Dashboard() {
               Loading Transaction Ledger...
            </div>
         </div>
+
+        {/* Overlay Components */}
+        <QuickSettings 
+          isOpen={isSettingsOpen} 
+          onClose={() => setIsSettingsOpen(false)} 
+        />
+        <QuickNotifications 
+          isOpen={isNotifOpen} 
+          onClose={() => setIsNotifOpen(false)} 
+        />
       </PageContainer>
     </AppLayout>
   );
