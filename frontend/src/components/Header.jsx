@@ -32,12 +32,16 @@ export default function Header({ title = "Sentinel AI" }) {
           </button>
         </div>
         
-        <div className="flex items-center gap-3 pl-4 border-l border-[#283639]">
+        {/* Profile/Connected Icon - Clickable Trigger */}
+        <div 
+          onClick={() => navigate('/profile')}
+          className="flex items-center gap-3 pl-4 border-l border-[#283639] cursor-pointer group"
+        >
           <div className="text-right hidden sm:block">
             <div className="text-[10px] text-primary font-bold uppercase">Connected</div>
-            <div className="text-sm font-mono text-gray-400">0x81...4a2</div>
+            <div className="text-sm font-mono text-gray-400 group-hover:text-white transition-colors">0x81...4a2</div>
           </div>
-          <div className="bg-gradient-to-br from-primary to-purple-600 rounded-full p-0.5 shadow-neon">
+          <div className="bg-gradient-to-br from-primary to-purple-600 rounded-full p-0.5 shadow-neon group-hover:scale-105 transition-transform">
             <div className="bg-surface-dark rounded-full p-1 flex">
               <span className="material-symbols-outlined text-white text-sm">wallet</span>
             </div>
