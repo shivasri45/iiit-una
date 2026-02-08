@@ -16,7 +16,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from datetime import datetime
+from datetime import datetime, timedelta
 from typing import List, Optional
 
 from config.settings import settings
@@ -34,7 +34,6 @@ Base = declarative_base()
 # ============================
 
 class Alert(Base):
-    """Alert database model"""
     __tablename__ = "alerts"
 
     id = Column(Integer, primary_key=True, index=True)
@@ -51,7 +50,6 @@ class Alert(Base):
 
 
 class Prediction(Base):
-    """Prediction history database model"""
     __tablename__ = "predictions"
 
     id = Column(Integer, primary_key=True, index=True)

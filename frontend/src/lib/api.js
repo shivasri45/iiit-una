@@ -56,6 +56,9 @@ export const verifyAlert = (id, body) =>
     body: JSON.stringify(body),
   });
 
+  export const getWalletTransactions = (wallet) =>
+  apiRequest(`/wallet/${wallet}/transactions`);
+
 export const getAlertStats = () => apiRequest("/alerts/stats");
 
 /* ================= DEFAULT EXPORT ================= */
@@ -71,3 +74,4 @@ export default {
   verifyAlert,
   getAlertStats,
 };
+
